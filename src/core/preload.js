@@ -48,7 +48,7 @@ module.exports = self => {
     const now = Date.now()
 
     retry({ times: fallbackApiUris.length }, (cb) => {
-      if (stopped) return cb(new Error(`preload aborted for ${cid}`))
+      if (stopped) return setImmediate(() => cb(new Error(`preload aborted for ${cid}`)))
 
       // Remove failed request from a previous attempt
       requests = requests.filter(r => r !== request)

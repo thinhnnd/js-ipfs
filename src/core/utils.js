@@ -2,6 +2,7 @@
 
 const promisify = require('promisify-es6')
 const map = require('async/map')
+const setImmediate = require('async/setImmediate')
 const isIpfs = require('is-ipfs')
 const CID = require('cids')
 
@@ -90,24 +91,24 @@ const resolvePath = promisify(function (objectAPI, ipfsPaths, callback) {
       try {
         cid = new CID(path)
       } catch (err) {
-        return cb(err)
+        return setImmediate(() => cb(err))
       }
 
-      return cb(null, cid.buffer)
+      return setImmediate(() => cb(null, cid.buffer))
     }
 
     let parsedPath
     try {
       parsedPath = exports.parseIpfsPath(path)
     } catch (err) {
-      return cb(err)
+      return setImmediate(() => cb(err))
     }
 
     const rootHash = new CID(parsedPath.hash)
     const rootLinks = parsedPath.links
 
     if (!rootLinks.length) {
-      return cb(null, rootHash.buffer)
+      return setImmediate(() => cb(null, rootHash.buffer))
     }
 
     objectAPI.get(rootHash, follow.bind(null, rootHash, rootLinks))

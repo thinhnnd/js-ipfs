@@ -105,7 +105,7 @@
     "hoek": "^6.1.2",
     "human-to-milliseconds": "^1.0.0",
     "interface-datastore": "~0.6.0",
-    "ipfs-bitswap": "~0.21.0",
+    "ipfs-bitswap": "github:ipfs/js-ipfs-bitswap#fix/async",
     "ipfs-block": "~0.8.0",
     "ipfs-block-service": "~0.15.1",
     "ipfs-http-client": "^28.1.0",

@@ -4,6 +4,7 @@ const peerId = require('peer-id')
 const PeerInfo = require('peer-info')
 const multiaddr = require('multiaddr')
 const waterfall = require('async/waterfall')
+const setImmediate = require('async/setImmediate')
 const Keychain = require('libp2p-keychain')
 const defaultsDeep = require('@nodeutils/defaults-deep')
 const NoKeychain = require('./no-keychain')
@@ -55,7 +56,7 @@ module.exports = function preStart (self) {
           self._keychain = new NoKeychain()
           self.log('no keychain, use --pass')
         }
-        cb(null, config)
+        setImmediate(() => cb(null, config))
       },
       (config, cb) => {
         const privKey = config.Identity.PrivKey
@@ -67,7 +68,7 @@ module.exports = function preStart (self) {
       (config, id, cb) => {
         // Import the private key as 'self', if needed.
         if (!pass) {
-          return cb(null, config, id)
+          return setImmediate(() => cb(null, config, id))
         }
         self._keychain.findKeyByName('self', (err) => {
           if (err) {
@@ -93,7 +94,7 @@ module.exports = function preStart (self) {
           })
         }
 
-        cb()
+        setImmediate(cb)
       },
       (cb) => self.pin._load(cb)
     ], callback)
