@@ -45,8 +45,11 @@ function testSignal (ipfs, sig) {
         }
       })
       proc.stderr.on('data', (data) => {
-        if (data.toString().length > 0) {
+        const message = data.toString()
+        if (message.length > 0 && !/warning/gi.test(message)) {
           reject(new Error(data))
+        } else {
+          console.warn(message)
         }
       })
     })
