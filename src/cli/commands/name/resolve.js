@@ -11,12 +11,14 @@ module.exports = {
     nocache: {
       alias: 'n',
       describe: 'Do not use cached entries. Default: false.',
-      default: false
+      default: false,
+      type: 'boolean'
     },
     recursive: {
       alias: 'r',
       recursive: 'Resolve until the result is not an IPNS name. Default: false.',
-      default: false
+      default: false,
+      type: 'boolean'
     }
   },
 
