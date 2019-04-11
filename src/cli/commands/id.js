@@ -1,5 +1,4 @@
 'use strict'
-const print = require('../utils').print
 
 module.exports = {
   command: 'id',
