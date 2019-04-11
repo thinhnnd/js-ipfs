@@ -17,8 +17,7 @@ module.exports = {
     argv.resolve((async () => {
       const ipfs = await argv.getIpfs()
       const id = await ipfs.id()
-      print(JSON.stringify(id, '', 2))
-      return id
+      return JSON.stringify(id, '', 2)
     })())
   }
 }
