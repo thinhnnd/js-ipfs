@@ -44,7 +44,7 @@ async function main (args) {
     if (getIpfs && getIpfs.instance) {
       const cleanup = getIpfs.rest[0]
 
-      cleanup.catch(err => debug(err))
+      cleanup().catch(err => debug(err))
     }
   })
 }
