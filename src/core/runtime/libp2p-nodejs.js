@@ -64,7 +64,10 @@ class Node extends libp2p {
           kBucketSize: 20,
           enabled: false,
           randomWalk: {
-            enabled: false
+            enabled: false,
+            interval: 600e3,
+            delay: 5e3,
+            timeout: 10e3
           }
         },
         EXPERIMENTAL: {
